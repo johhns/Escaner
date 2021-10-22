@@ -1,5 +1,6 @@
 package com.johhns.escaner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         btnScan      = findViewById( R.id.btnScan ) ;
         txtResultado = findViewById( R.id.txtResultado ) ;
+
+        if (savedInstanceState != null ) {
+            txtResultado.setText( savedInstanceState.getString("CODIGO") );
+        }
 
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,4 +65,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString("CODIGO", txtResultado.getText().toString() );
+        super.onSaveInstanceState(outState);
+    }
 }
